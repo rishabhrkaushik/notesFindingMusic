@@ -7,7 +7,7 @@ from scipy.fftpack import fft
 #open file
 wave_read= wave.open("audioFiles/Audio_1.wav",'r')
 
-#number of readings in file
+#number of frames in file
 file_length = wave_read.getnframes()
 
 #sampling frequency
@@ -18,3 +18,13 @@ frames_per_window = int(fs*0.05)
 no_of_windows = int(np.ceil(file_length/frames_per_window))
 
 print "Read Sound\n", "Number of frames: ", file_length, "\nFrames per window: ", frames_per_window, "\nNumber of windows: ", no_of_windows
+
+#read sound
+sound=np.zeros(file_length)
+for i in range(file_length):
+	data = wave_read.readframes(1)
+	data = struct.unpack("<h", data)
+	sound[i]=int(data[0])
+
+#normalize the amplitude from 16 bit to range -1 to 1
+sound = np.divide(sound,float(2**15))
