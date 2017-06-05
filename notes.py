@@ -61,3 +61,20 @@ for i in range(0, no_of_windows):
 	if Arms[i] != 0:
 		for frame in windows[i]:
 			this_note.append(frame)
+
+#calculate frequency of notes````````
+for note in notes:
+	# print "New", len(note)
+	fft_note = np.zeros(len(note))
+	fft_magnitude = np.zeros(len(note))
+	fft_note = fft(note)
+	for i in range(0, len(note)):
+		fft_magnitude[i] = np.absolute(fft_note[i])
+
+	maximum_fft = np.amax(fft_magnitude)
+	# print "Max_fft", maximum_fft
+
+	for i in range(0, len(note)):
+		if fft_magnitude[i] == maximum_fft:
+			print "Position", i, "Freq", i*44100/len(note)	
+			break
