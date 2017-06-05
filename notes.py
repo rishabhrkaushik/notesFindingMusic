@@ -46,7 +46,7 @@ for window in range(0, no_of_windows):
 	for frame in windows[window]:
 		rms = rms + frame**2
 	rms = np.sqrt(rms/frames_per_window)
-	if rms < 0.6:
+	if rms < 0.7:
 		rms = 0
 	Arms.append(rms)
 
