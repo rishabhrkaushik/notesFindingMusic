@@ -28,3 +28,12 @@ for i in range(file_length):
 
 #normalize the amplitude from 16 bit to range -1 to 1
 sound = np.divide(sound,float(2**15))
+
+#distribute unpacked sound in windows
+windows = []
+
+for i in range(0, no_of_windows):
+	this_window = np.zeros(frames_per_window)
+	for j in range(0, frames_per_window):
+		this_window[j] = sound[(i * frames_per_window) + j]
+	windows.append(this_window)
