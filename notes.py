@@ -78,6 +78,7 @@ for i in range(0, no_of_windows):
 			this_note.append(frame)
 
 #calculate frequency of notes````````
+notesFound = []
 for note in notes:
 	# print "New", len(note)
 	fft_note = np.zeros(len(note))
@@ -94,4 +95,13 @@ for note in notes:
 		found = False
 		if fft_magnitude[i] == maximum_fft:
 			frequency = i*44100/len(note)
-			break
+			for key in notesDict:
+				for value in notesDict[key]:
+					if value - 2 < frequency < value + 2:
+						notesFound.append(key)
+						found = True
+						break
+				if(found):
+					break
+
+print notesFound
