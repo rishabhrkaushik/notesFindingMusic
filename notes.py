@@ -49,3 +49,15 @@ for window in range(0, no_of_windows):
 	if rms < 0.6:
 		rms = 0
 	Arms.append(rms)
+
+#join consequtive windows if Arms != 0 toghether to form a note 
+notes = []
+this_note = []
+for i in range(0, no_of_windows):
+	if Arms[i] == 0:
+		if len(this_note) != 0:
+			notes.append(this_note)
+			this_note = []
+	if Arms[i] != 0:
+		for frame in windows[i]:
+			this_note.append(frame)
