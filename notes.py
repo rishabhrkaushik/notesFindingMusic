@@ -37,3 +37,15 @@ for i in range(0, no_of_windows):
 	for j in range(0, frames_per_window):
 		this_window[j] = sound[(i * frames_per_window) + j]
 	windows.append(this_window)
+
+#calculate rms of amplitude
+Arms = []
+
+for window in range(0, no_of_windows):
+	rms = 0
+	for frame in windows[window]:
+		rms = rms + frame**2
+	rms = np.sqrt(rms/frames_per_window)
+	if rms < 0.6:
+		rms = 0
+	Arms.append(rms)
