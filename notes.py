@@ -77,13 +77,14 @@ for i in range(0, no_of_windows):
 		for frame in windows[i]:
 			this_note.append(frame)
 
-#calculate frequency of notes````````
+#calculate frequency of notes
 notesFound = []
 for note in notes:
-	# print "New", len(note)
+	#find fourier tranform
 	fft_note = np.zeros(len(note))
 	fft_magnitude = np.zeros(len(note))
 	fft_note = fft(note)
+	#find max magnitude of fft
 	for i in range(0, len(note)):
 		fft_magnitude[i] = np.absolute(fft_note[i])
 
@@ -94,7 +95,9 @@ for note in notes:
 	for i in range(0, len(note)):
 		found = False
 		if fft_magnitude[i] == maximum_fft:
+			#find frequency
 			frequency = i*44100/len(note)
+			#map frequency to note name
 			for key in notesDict:
 				for value in notesDict[key]:
 					if value - 2 < frequency < value + 2:
